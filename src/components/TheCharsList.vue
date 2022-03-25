@@ -1,17 +1,24 @@
 <template>
   <div class="wrapper">
-    <ul class="chars-list" v-if="charLists.length">
+    <TransitionGroup
+      tag="ul"
+      name="list"
+      appear
+      class="chars-list"
+      v-if="charLists.length"
+    >
       <li
         class="char"
         tabindex="0"
         v-for="char in charLists"
         :key="char.id"
         @click="setSelectedChar(char.id)"
+        @keypress.enter="setSelectedChar(char.id)"
       >
         <div class="img"><img :src="char.thumbnail" :alt="char.name" /></div>
         <h3 class="title fz-22">{{ char.name }}</h3>
       </li>
-    </ul>
+    </TransitionGroup>
     <div class="loading-wrapper" v-else-if="loading">
       <app-spinner></app-spinner>
     </div>
@@ -42,7 +49,7 @@ export default defineComponent({
   components: { AppButtonMain, AppSpinner },
   setup() {
     const store = useCharsList();
-    const { getChars,setSelectedChar } = store;
+    const { getChars, setSelectedChar } = store;
     const { charLists, status, ended } = storeToRefs(store);
     const { loading, error } = useStatus(status);
     const buttonText = computed(() => {
@@ -84,6 +91,10 @@ export default defineComponent({
 .loading-wrapper {
   position: relative;
   height: 200px;
+}
+
+.list-enter-from {
+  opacity: 0;
 }
 
 .char {

@@ -6,30 +6,32 @@
     <template v-else-if="error">
       <p>{{ STATUS_ERROR }}</p>
     </template>
-    <template v-else-if="randomChar">
-      <div class="preview">
-        <img :src="randomChar.thumbnail" :alt="randomChar.name" />
-      </div>
-      <div class="text">
-        <h2 class="title fz-22">{{ randomChar.name }}</h2>
-        <p class="description fz-14">
-          {{ randomChar.description }}
-        </p>
-        <div class="btn-group">
-          <template v-for="link in randomChar.links" :key="link.label">
-            <app-button-main type="a" :href="link.url" :className="link.type"
-              >{{ link.label }}
-            </app-button-main>
-          </template>
+    <Transition v-else-if="randomChar" appear>
+      <div class="wrapper">
+        <div class="preview">
+          <img :src="randomChar.thumbnail" :alt="randomChar.name" />
+        </div>
+        <div class="text">
+          <h2 class="title fz-22">{{ randomChar.name }}</h2>
+          <p class="description fz-14">
+            {{ randomChar.description }}
+          </p>
+          <div class="btn-group">
+            <template v-for="link in randomChar.links" :key="link.label">
+              <app-button-main type="a" :href="link.url" :className="link.type"
+                >{{ link.label }}
+              </app-button-main>
+            </template>
+          </div>
         </div>
       </div>
-    </template>
+    </Transition>
   </article>
 </template>
 
 <script lang="ts">
 import AppButtonMain from '@/components/AppButtonMain.vue';
-import { computed, defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import useRandomChar from '@/stores/useRandomChar';
 import { storeToRefs } from 'pinia';
 import useStatus from '@/hooks/useStatus';
@@ -55,6 +57,9 @@ export default defineComponent({
   padding: 35px;
   background: #ffffff;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.wrapper {
   display: flex;
   gap: 30px;
 }

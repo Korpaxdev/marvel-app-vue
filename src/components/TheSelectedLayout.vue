@@ -1,7 +1,12 @@
 <template>
   <aside ref="selectLayout">
     <app-skeleton v-if="!selectedChar"></app-skeleton>
-    <the-selected-char v-else :char="selectedChar"></the-selected-char>
+    <transition v-else appear>
+      <the-selected-char
+        :char="selectedChar"
+        :key="selectedChar.id"
+      ></the-selected-char>
+    </transition>
   </aside>
 </template>
 

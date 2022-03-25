@@ -1,12 +1,18 @@
 <template>
-  <div class="container random-wrapper">
-    <the-random-char></the-random-char>
-    <the-random-banner></the-random-banner>
-  </div>
-  <div class="container list-wrapper">
-    <the-chars-list></the-chars-list>
-    <the-char-selected></the-char-selected>
-  </div>
+  <main>
+    <section class="random">
+      <div class="container random-wrapper">
+        <the-random-char></the-random-char>
+        <the-random-banner></the-random-banner>
+      </div>
+    </section>
+    <section class="char-list">
+      <div class="container list-wrapper">
+        <the-chars-list></the-chars-list>
+        <the-char-selected></the-char-selected>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>

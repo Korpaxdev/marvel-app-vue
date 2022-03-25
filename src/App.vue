@@ -1,9 +1,11 @@
 <template>
   <app-header></app-header>
-  <router-view #="{ Component }">
-    <keep-alive>
-      <component :is="Component"></component>
-    </keep-alive>
+  <router-view #="{ Component, route }">
+    <transition>
+      <keep-alive>
+        <component :is="Component" :key="route.path"></component>
+      </keep-alive>
+    </transition>
   </router-view>
 </template>
 
@@ -15,4 +17,11 @@ export default {
   components: { TheCharsPage, AppHeader },
 };
 </script>
-<style></style>
+<style lang='scss'>
+.v-enter-active {
+  transition: all 0.5s ease;
+}
+.v-enter-from {
+  opacity: 0;
+}
+</style>

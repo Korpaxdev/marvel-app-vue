@@ -1,5 +1,5 @@
 <template>
-  <div class="selected-char">
+  <div class="selected-char" ref="parentChar">
     <div class="preview">
       <div class="img"><img :src="char.thumbnail" :alt="char.name" /></div>
       <div class="control">
@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import type { Prop } from 'vue';
-import { defineComponent } from 'vue';
+import { defineComponent, onUpdated, ref } from 'vue';
 import AppButtonMain from '@/components/AppButtonMain.vue';
 import type { iTransformChar } from '@/types/interfaces';
 
